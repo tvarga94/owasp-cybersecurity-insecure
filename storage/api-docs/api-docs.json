@@ -1,0 +1,38 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "NASA API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/nasa/picture-of-the-day": {
+            "get": {
+                "summary": "Get NASA Picture of the Day",
+                "operationId": "801dffb02462d140908cc246fc619aba",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "url": {
+                                            "type": "string"
+                                        },
+                                        "explanation": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
