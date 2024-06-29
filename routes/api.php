@@ -11,3 +11,6 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/nasa/picture-of-the-day', [NasaController::class, 'showPictureOfTheDay']);
 Route::get('/nasa/mars-rover-photos', [NasaController::class, 'showMarsRoverPhotos']);
+Route::get('/nasa/earth-imagery', [NasaController::class, 'showEarthImagery']);
+Route::get('/nasa/asteroids', [NasaController::class, 'showAsteroids']);
+Route::get('/nasa/epic', [NasaController::class, 'showEPIC']);

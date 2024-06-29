@@ -59,6 +59,117 @@
                     }
                 }
             }
+        },
+        "/api/nasa/earth-imagery": {
+            "get": {
+                "summary": "Get Earth Imagery",
+                "operationId": "7d6067ce121e83da176b06fa2f5fd59e",
+                "parameters": [
+                    {
+                        "name": "lat",
+                        "in": "query",
+                        "description": "Latitude",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "lon",
+                        "in": "query",
+                        "description": "Longitude",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Date",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "url": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/nasa/asteroids": {
+            "get": {
+                "summary": "Get Asteroids",
+                "operationId": "8f16e5c66fee414bfdfa929aa3d47c46",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "near_earth_objects": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/nasa/epic": {
+            "get": {
+                "summary": "Get EPIC",
+                "operationId": "1f32fb564cd511ed62b87556331a4038",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "caption": {
+                                            "type": "string"
+                                        },
+                                        "image": {
+                                            "type": "string"
+                                        },
+                                        "date": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
