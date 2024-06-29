@@ -77,4 +77,100 @@ class NasaApiClient implements NasaApiClientInterface
             return ['error' => 'Unable to fetch EPIC. Please try again later.'];
         }
     }
+
+    public function getMarsWeather(): array
+    {
+        $url = 'https://api.nasa.gov/insight_weather/?api_key=' . $this->apiKey . '&feedtype=json&ver=1.0';
+        try {
+            $response = $this->client->get($url);
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            Log::error('Error fetching Mars Weather: ' . $e->getMessage());
+            return ['error' => 'Unable to fetch Mars Weather. Please try again later.'];
+        }
+    }
+
+    public function getNeoFeed(): array
+    {
+        $url = 'https://api.nasa.gov/neo/rest/v1/feed?api_key=' . $this->apiKey;
+        try {
+            $response = $this->client->get($url);
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            Log::error('Error fetching Neo Feed: ' . $e->getMessage());
+            return ['error' => 'Unable to fetch Neo Feed. Please try again later.'];
+        }
+    }
+
+    public function getTechTransferPatents(): array
+    {
+        $url = 'https://api.nasa.gov/techtransfer/patent/?api_key=' . $this->apiKey;
+        try {
+            $response = $this->client->get($url);
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            Log::error('Error fetching Tech Transfer Patents: ' . $e->getMessage());
+            return ['error' => 'Unable to fetch Tech Transfer Patents. Please try again later.'];
+        }
+    }
+
+    public function getLibraryAssets(): array
+    {
+        $url = 'https://images-api.nasa.gov/search?q=moon';
+        try {
+            $response = $this->client->get($url);
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            Log::error('Error fetching Library Assets: ' . $e->getMessage());
+            return ['error' => 'Unable to fetch Library Assets. Please try again later.'];
+        }
+    }
+
+    public function getSoundsLibrary(): array
+    {
+        $url = 'https://api.nasa.gov/planetary/sounds?api_key=' . $this->apiKey;
+        try {
+            $response = $this->client->get($url);
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            Log::error('Error fetching Sounds Library: ' . $e->getMessage());
+            return ['error' => 'Unable to fetch Sounds Library. Please try again later.'];
+        }
+    }
+
+    public function getSatelliteImagery(): array
+    {
+        $url = 'https://api.nasa.gov/planetary/earth/imagery?lon=-95.33&lat=29.78&date=2018-01-01&dim=0.10&api_key=' . $this->apiKey;
+        try {
+            $response = $this->client->get($url);
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            Log::error('Error fetching Satellite Imagery: ' . $e->getMessage());
+            return ['error' => 'Unable to fetch Satellite Imagery. Please try again later.'];
+        }
+    }
+
+    public function getTechPortProjects(): array
+    {
+        $url = 'https://techport.nasa.gov/api/projects?api_key=' . $this->apiKey;
+        try {
+            $response = $this->client->get($url);
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            Log::error('Error fetching TechPort Projects: ' . $e->getMessage());
+            return ['error' => 'Unable to fetch TechPort Projects. Please try again later.'];
+        }
+    }
+
+    public function getSpinoff(): array
+    {
+        $url = 'https://api.nasa.gov/techtransfer/spinoff?api_key=' . $this->apiKey;
+        try {
+            $response = $this->client->get($url);
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (GuzzleException $e) {
+            Log::error('Error fetching Spinoff: ' . $e->getMessage());
+            return ['error' => 'Unable to fetch Spinoff. Please try again later.'];
+        }
+    }
 }

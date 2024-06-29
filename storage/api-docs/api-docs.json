@@ -170,6 +170,134 @@
                     }
                 }
             }
+        },
+        "/api/mars-weather": {
+            "get": {
+                "summary": "Get Mars Weather",
+                "operationId": "17519abfb50beb3db6ac9a911ca8e60f",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/neo-feed": {
+            "get": {
+                "summary": "Get NEO Feed",
+                "operationId": "883b58f885aef8f465e39c0c3181c890",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tech-transfer-patents": {
+            "get": {
+                "summary": "Get Tech Transfer Patents",
+                "operationId": "fad6e79688f3339ac4c9395774a86c90",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/library-assets": {
+            "get": {
+                "summary": "Get Library Assets",
+                "operationId": "4ac8504bd0b272fa859312ff56111797",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sounds-library": {
+            "get": {
+                "summary": "Get Sounds Library",
+                "operationId": "c2dfc42d13834acd1a3736713b06e995",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/satellite-imagery": {
+            "get": {
+                "summary": "Get Satellite Imagery",
+                "operationId": "8f7aa50e09eb28876a1fdb3702daab35",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/techport-projects": {
+            "get": {
+                "summary": "Get TechPort Projects",
+                "operationId": "3989ac368b4edf7ba8e556dff5022e97",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/spinoff": {
+            "get": {
+                "summary": "Get Spinoff",
+                "operationId": "098250fb358543d8cadbac8842161439",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -145,4 +145,140 @@ class NasaController extends Controller
         $data = $this->nasaApiClient->getEPIC();
         return response()->json($data);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/mars-weather",
+     *     summary="Get Mars Weather",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent()
+     *     )
+     * )
+     */
+    public function getMarsWeather(): JsonResponse
+    {
+        $data = $this->nasaApiClient->getMarsWeather();
+        return response()->json($data);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/neo-feed",
+     *     summary="Get NEO Feed",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent()
+     *     )
+     * )
+     */
+    public function getNeoFeed(): JsonResponse
+    {
+        $data = $this->nasaApiClient->getNeoFeed();
+        return response()->json($data);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/tech-transfer-patents",
+     *     summary="Get Tech Transfer Patents",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent()
+     *     )
+     * )
+     */
+    public function getTechTransferPatents(): JsonResponse
+    {
+        $data = $this->nasaApiClient->getTechTransferPatents();
+        return response()->json($data);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/library-assets",
+     *     summary="Get Library Assets",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent()
+     *     )
+     * )
+     */
+    public function getLibraryAssets(): JsonResponse
+    {
+        $data = $this->nasaApiClient->getLibraryAssets();
+        return response()->json($data);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/sounds-library",
+     *     summary="Get Sounds Library",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent()
+     *     )
+     * )
+     */
+    public function getSoundsLibrary(): JsonResponse
+    {
+        $data = $this->nasaApiClient->getSoundsLibrary();
+        return response()->json($data);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/satellite-imagery",
+     *     summary="Get Satellite Imagery",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent()
+     *     )
+     * )
+     */
+    public function getSatelliteImagery(): JsonResponse
+    {
+        $data = $this->nasaApiClient->getSatelliteImagery();
+        return response()->json($data);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/techport-projects",
+     *     summary="Get TechPort Projects",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent()
+     *     )
+     * )
+     */
+    public function getTechPortProjects(): JsonResponse
+    {
+        $data = $this->nasaApiClient->getTechPortProjects();
+        return response()->json($data);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/spinoff",
+     *     summary="Get Spinoff",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent()
+     *     )
+     * )
+     */
+    public function getSpinoff(): JsonResponse
+    {
+        $data = $this->nasaApiClient->getSpinoff();
+        return response()->json($data);
+    }
 }
