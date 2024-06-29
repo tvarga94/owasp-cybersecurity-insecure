@@ -33,6 +33,32 @@
                     }
                 }
             }
+        },
+        "/api/nasa/mars-rover-photos": {
+            "get": {
+                "summary": "Get Mars Rover Photos",
+                "operationId": "7823a137cb43c6d04548c6105949512a",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "photos": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

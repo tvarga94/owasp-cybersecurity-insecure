@@ -41,4 +41,24 @@ class NasaController extends Controller
         $data = $this->nasaApiClient->getPictureOfTheDay();
         return response()->json($data);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/nasa/mars-rover-photos",
+     *     summary="Get Mars Rover Photos",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="photos", type="array", @OA\Items(type="object"))
+     *         )
+     *     ),
+     * )
+     */
+    public function showMarsRoverPhotos(): JsonResponse
+    {
+        $data = $this->nasaApiClient->getMarsRoverPhotos();
+        return response()->json($data);
+    }
 }
