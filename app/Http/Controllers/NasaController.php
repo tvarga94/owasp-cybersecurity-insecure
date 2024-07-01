@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Interfaces\NasaApiRepositoryInterface;
@@ -9,6 +11,13 @@ use Illuminate\Http\JsonResponse;
  * @OA\Info(
  *     title="NASA API",
  *     version="1.0.0",
+ * )
+ */
+
+/**
+ * @OA\Tag(
+ *     name="CustomTag",
+ *     description="Endpoints related to NASA API operations"
  * )
  */
 class NasaController extends Controller
