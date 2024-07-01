@@ -19,8 +19,8 @@ return [
                 'format_to_use_for_docs' => env('L5_FORMAT_TO_USE_FOR_DOCS', 'json'),
                 'annotations' => [
                     base_path('app/Http/Controllers'),
-                    base_path('app/Http/Clients'),
-                    base_path('app/Http/Interfaces'),
+                    base_path('app/Clients'),
+                    base_path('app/Interfaces'),
                 ],
             ],
         ],

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Interfaces;
+namespace App\Interfaces;
 
-interface NasaApiClientInterface
+interface NasaApiRepositoryInterface
 {
     public function getPictureOfTheDay(): array;
     public function getMarsRoverPhotos(): array;

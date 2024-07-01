@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Clients;
+namespace App\Clients;
 
-use App\Http\Interfaces\NasaApiClientInterface;
+use App\Interfaces\NasaApiRepositoryInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
 
-class NasaApiClient implements NasaApiClientInterface
+class NasaApiClient implements NasaApiRepositoryInterface
 {
     private Client $client;
     private string $apiKey;

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Interfaces\NasaApiClientInterface;
+use App\Interfaces\NasaApiRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -13,11 +13,11 @@ use Illuminate\Http\JsonResponse;
  */
 class NasaController extends Controller
 {
-    private NasaApiClientInterface $nasaApiClient;
+    private NasaApiRepositoryInterface $nasaApiRepository;
 
-    public function __construct(NasaApiClientInterface $nasaApiClient)
+    public function __construct(NasaApiRepositoryInterface $nasaApiRepository)
     {
-        $this->nasaApiClient = $nasaApiClient;
+        $this->nasaApiRepository = $nasaApiRepository;
     }
 
     /**
@@ -38,7 +38,7 @@ class NasaController extends Controller
      */
     public function showPictureOfTheDay(): JsonResponse
     {
-        $data = $this->nasaApiClient->getPictureOfTheDay();
+        $data = $this->nasaApiRepository->getPictureOfTheDay();
         return response()->json($data);
     }
 
@@ -58,7 +58,7 @@ class NasaController extends Controller
      */
     public function showMarsRoverPhotos(): JsonResponse
     {
-        $data = $this->nasaApiClient->getMarsRoverPhotos();
+        $data = $this->nasaApiRepository->getMarsRoverPhotos();
         return response()->json($data);
     }
 
@@ -100,7 +100,7 @@ class NasaController extends Controller
      */
     public function showEarthImagery(float $lat, float $lon, string $date): JsonResponse
     {
-        $data = $this->nasaApiClient->getEarthImagery($lat, $lon, $date);
+        $data = $this->nasaApiRepository->getEarthImagery($lat, $lon, $date);
         return response()->json($data);
     }
 
@@ -120,7 +120,7 @@ class NasaController extends Controller
      */
     public function showAsteroids(): JsonResponse
     {
-        $data = $this->nasaApiClient->getAsteroids();
+        $data = $this->nasaApiRepository->getAsteroids();
         return response()->json($data);
     }
 
@@ -142,7 +142,7 @@ class NasaController extends Controller
      */
     public function showEPIC(): JsonResponse
     {
-        $data = $this->nasaApiClient->getEPIC();
+        $data = $this->nasaApiRepository->getEPIC();
         return response()->json($data);
     }
 
@@ -159,7 +159,7 @@ class NasaController extends Controller
      */
     public function getMarsWeather(): JsonResponse
     {
-        $data = $this->nasaApiClient->getMarsWeather();
+        $data = $this->nasaApiRepository->getMarsWeather();
         return response()->json($data);
     }
 
@@ -176,7 +176,7 @@ class NasaController extends Controller
      */
     public function getNeoFeed(): JsonResponse
     {
-        $data = $this->nasaApiClient->getNeoFeed();
+        $data = $this->nasaApiRepository->getNeoFeed();
         return response()->json($data);
     }
 
@@ -193,7 +193,7 @@ class NasaController extends Controller
      */
     public function getTechTransferPatents(): JsonResponse
     {
-        $data = $this->nasaApiClient->getTechTransferPatents();
+        $data = $this->nasaApiRepository->getTechTransferPatents();
         return response()->json($data);
     }
 
@@ -210,7 +210,7 @@ class NasaController extends Controller
      */
     public function getLibraryAssets(): JsonResponse
     {
-        $data = $this->nasaApiClient->getLibraryAssets();
+        $data = $this->nasaApiRepository->getLibraryAssets();
         return response()->json($data);
     }
 
@@ -227,7 +227,7 @@ class NasaController extends Controller
      */
     public function getSoundsLibrary(): JsonResponse
     {
-        $data = $this->nasaApiClient->getSoundsLibrary();
+        $data = $this->nasaApiRepository->getSoundsLibrary();
         return response()->json($data);
     }
 
@@ -244,7 +244,7 @@ class NasaController extends Controller
      */
     public function getSatelliteImagery(): JsonResponse
     {
-        $data = $this->nasaApiClient->getSatelliteImagery();
+        $data = $this->nasaApiRepository->getSatelliteImagery();
         return response()->json($data);
     }
 
@@ -261,7 +261,7 @@ class NasaController extends Controller
      */
     public function getTechPortProjects(): JsonResponse
     {
-        $data = $this->nasaApiClient->getTechPortProjects();
+        $data = $this->nasaApiRepository->getTechPortProjects();
         return response()->json($data);
     }
 
@@ -278,7 +278,7 @@ class NasaController extends Controller
      */
     public function getSpinoff(): JsonResponse
     {
-        $data = $this->nasaApiClient->getSpinoff();
+        $data = $this->nasaApiRepository->getSpinoff();
         return response()->json($data);
     }
 }

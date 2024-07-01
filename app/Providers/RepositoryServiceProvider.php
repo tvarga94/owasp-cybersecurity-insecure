@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Http\Clients\NasaApiClient;
-use App\Http\Interfaces\NasaApiClientInterface;
+use App\Clients\NasaApiClient;
+use App\Interfaces\NasaApiRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -15,7 +15,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(NasaApiClientInterface::class, NasaApiClient::class);
+        $this->app->bind(NasaApiRepositoryInterface::class, NasaApiClient::class);
     }
 
     /**
