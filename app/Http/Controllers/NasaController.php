@@ -11,13 +11,7 @@ use Illuminate\Http\JsonResponse;
  * @OA\Info(
  *     title="NASA API",
  *     version="1.0.0",
- * )
- */
-
-/**
- * @OA\Tag(
- *     name="CustomTag",
- *     description="Endpoints related to NASA API operations"
+ *     description="API documentation for NASA API integration",
  * )
  */
 class NasaController extends Controller

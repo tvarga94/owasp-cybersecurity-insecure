@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'default' => 'default',
+    'default' => 'nasa_api',
     'documentations' => [
-        'default' => [
+        'nasa_api' => [
             'api' => [
                 'title' => 'NASA API',
                 'description' => 'API documentation for NASA API integration',

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\IsAdmin;
+
 return [
 
     /*
@@ -134,6 +136,11 @@ return [
     |
     */
 
+    'middleware' => [
+        // other middlewares
+        IsAdmin::class,
+    ],
+
     'providers' => [
 
         /*
@@ -173,7 +180,7 @@ return [
 
         // Custom Service Providers
         App\Providers\RepositoryServiceProvider::class,
-
+        App\Providers\MiddlewareServiceProvider::class,
     ],
 
     /*
