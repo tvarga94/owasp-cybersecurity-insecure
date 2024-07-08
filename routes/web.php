@@ -4,6 +4,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+Route::middleware('throttle:10,1')->group(function () {
+    Route::post('/login', 'Auth\LoginController@login');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
