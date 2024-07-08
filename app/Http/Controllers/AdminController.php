@@ -4,42 +4,46 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserRequest;
+use App\Interfaces\AdminRepositoryInterface;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class AdminController extends Controller
 {
+    private AdminRepositoryInterface $userRepository;
+
+    public function __construct(AdminRepositoryInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function index(): View
     {
-        $users = User::where('is_admin', false)->get();
+        $users = $this->userRepository->getAllUsers();
         return view('admin.dashboard', compact('users'));
     }
 
-    public function edit(User $user): View
+    public function edit(int $id): View
     {
-        return view('admin.edit-user', compact('user'));
+        $user = $this->userRepository->findUserById($id);
+        return view('admin.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user): RedirectResponse
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        ]);
+        $attributes = $request->validated();
+        $this->userRepository->updateUser($user, $attributes);
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
-
-        return redirect()->route('admin.dashboard')->with('success', 'User updated successfully.');
+        return redirect()->route('admin.dashboard')->with('success', 'User updated successfully');
     }
 
-    public function destroy(User $user): RedirectResponse
+    public function destroy(int $id): RedirectResponse
     {
-        $user->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'User deleted successfully.');
+        $user = $this->userRepository->findUserById($id);
+        $this->userRepository->deleteUser($user);
+
+        return redirect()->route('admin.dashboard')->with('success', 'User deleted successfully');
     }
 }
