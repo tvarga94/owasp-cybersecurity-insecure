@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\NasaApiRepositoryInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @OA\Info(
@@ -42,6 +44,13 @@ class NasaController extends Controller
     public function showPictureOfTheDay(): JsonResponse
     {
         $data = $this->nasaApiRepository->getPictureOfTheDay();
+        $user = Auth::user();
+        Log::info('Fetched NASA Picture of the Day', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -62,6 +71,13 @@ class NasaController extends Controller
     public function showMarsRoverPhotos(): JsonResponse
     {
         $data = $this->nasaApiRepository->getMarsRoverPhotos();
+        $user = Auth::user();
+        Log::info('Fetched Mars Rover Photos', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -104,6 +120,16 @@ class NasaController extends Controller
     public function showEarthImagery(float $lat, float $lon, string $date): JsonResponse
     {
         $data = $this->nasaApiRepository->getEarthImagery($lat, $lon, $date);
+        $user = Auth::user();
+        Log::info('Fetched Earth Imagery', [
+            'data' => $data,
+            'lat' => $lat,
+            'lon' => $lon,
+            'date' => $date,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -124,6 +150,13 @@ class NasaController extends Controller
     public function showAsteroids(): JsonResponse
     {
         $data = $this->nasaApiRepository->getAsteroids();
+        $user = Auth::user();
+        Log::info('Fetched Asteroids', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -146,6 +179,13 @@ class NasaController extends Controller
     public function showEPIC(): JsonResponse
     {
         $data = $this->nasaApiRepository->getEPIC();
+        $user = Auth::user();
+        Log::info('Fetched EPIC', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -163,6 +203,13 @@ class NasaController extends Controller
     public function getMarsWeather(): JsonResponse
     {
         $data = $this->nasaApiRepository->getMarsWeather();
+        $user = Auth::user();
+        Log::info('Fetched Mars Weather', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -180,6 +227,13 @@ class NasaController extends Controller
     public function getNeoFeed(): JsonResponse
     {
         $data = $this->nasaApiRepository->getNeoFeed();
+        $user = Auth::user();
+        Log::info('Fetched NEO Feed', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -197,6 +251,13 @@ class NasaController extends Controller
     public function getTechTransferPatents(): JsonResponse
     {
         $data = $this->nasaApiRepository->getTechTransferPatents();
+        $user = Auth::user();
+        Log::info('Fetched Tech Transfer Patents', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -214,6 +275,13 @@ class NasaController extends Controller
     public function getLibraryAssets(): JsonResponse
     {
         $data = $this->nasaApiRepository->getLibraryAssets();
+        $user = Auth::user();
+        Log::info('Fetched Library Assets', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -231,6 +299,13 @@ class NasaController extends Controller
     public function getSoundsLibrary(): JsonResponse
     {
         $data = $this->nasaApiRepository->getSoundsLibrary();
+        $user = Auth::user();
+        Log::info('Fetched Sounds Library', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -248,6 +323,13 @@ class NasaController extends Controller
     public function getSatelliteImagery(): JsonResponse
     {
         $data = $this->nasaApiRepository->getSatelliteImagery();
+        $user = Auth::user();
+        Log::info('Fetched Satellite Imagery', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -265,6 +347,13 @@ class NasaController extends Controller
     public function getTechPortProjects(): JsonResponse
     {
         $data = $this->nasaApiRepository->getTechPortProjects();
+        $user = Auth::user();
+        Log::info('Fetched TechPort Projects', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 
@@ -282,6 +371,13 @@ class NasaController extends Controller
     public function getSpinoff(): JsonResponse
     {
         $data = $this->nasaApiRepository->getSpinoff();
+        $user = Auth::user();
+        Log::info('Fetched Spinoff', [
+            'data' => $data,
+            'user_id' => $user->id,
+            'user_name' => $user->name,
+            'timestamp' => now()
+        ]);
         return response()->json($data);
     }
 }
