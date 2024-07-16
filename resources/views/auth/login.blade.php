@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <style>
+        body {margin:0;line-height:inherit;background-image:url('{{ asset('storage/images/moon.png') }}');background-size:cover;background-position:center;}
+    </style>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
