@@ -8,7 +8,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
 Route::get('/nasa/picture-of-the-day', [NasaController::class, 'showPictureOfTheDay']);
 Route::get('/nasa/mars-rover-photos', [NasaController::class, 'showMarsRoverPhotos']);
 Route::get('/nasa/earth-imagery', [NasaController::class, 'showEarthImagery']);

@@ -1,0 +1,7 @@
+# grumphp.yml
+grumphp:
+  stop_on_failure: true
+  parallel: false
+  tasks:
+    phpunit:
+      config_file: './phpunit.xml'

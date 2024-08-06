@@ -23,12 +23,14 @@ class AdminController extends Controller
     public function index(): View
     {
         $users = $this->userRepository->getAllUsers();
+
         return view('admin.dashboard', compact('users'));
     }
 
     public function edit(int $id): View
     {
         $user = $this->userRepository->findUserById($id);
+
         return view('admin.edit', compact('user'));
     }
 
@@ -41,7 +43,7 @@ class AdminController extends Controller
             'user_id' => $user->id,
             'attributes' => $attributes,
             'admin_id' => auth()->id(),
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'User updated successfully');
@@ -55,7 +57,7 @@ class AdminController extends Controller
         Log::info('User deleted', [
             'user_id' => $user->id,
             'admin_id' => auth()->id(),
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'User deleted successfully');

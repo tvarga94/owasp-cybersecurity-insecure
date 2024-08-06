@@ -15,6 +15,7 @@ class IsAdmin
         }
 
         Log::warning('Unauthorized admin access attempt', ['user_id' => auth()->check() ? auth()->user()->id : 'guest', 'timestamp' => now()]);
+
         return redirect()->route('dashboard');
     }
 }

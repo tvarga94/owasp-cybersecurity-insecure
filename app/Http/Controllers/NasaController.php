@@ -8,6 +8,7 @@ use App\Interfaces\NasaApiRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Info(
@@ -29,11 +30,14 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/nasa/picture-of-the-day",
      *     summary="Get NASA Picture of the Day",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful response",
+     *
      *         @OA\JsonContent(
      *             type="object",
+     *
      *             @OA\Property(property="title", type="string"),
      *             @OA\Property(property="url", type="string"),
      *             @OA\Property(property="explanation", type="string"),
@@ -45,12 +49,18 @@ class NasaController extends Controller
     {
         $data = $this->nasaApiRepository->getPictureOfTheDay();
         $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Unauthenticated'], Response::HTTP_UNAUTHORIZED);
+        }
+
         Log::info('Fetched NASA Picture of the Day', [
             'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now()
+            'user_id' => $user['id'],
+            'user_name' => $user['name'],
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -58,11 +68,14 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/nasa/mars-rover-photos",
      *     summary="Get Mars Rover Photos",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful response",
+     *
      *         @OA\JsonContent(
      *             type="object",
+     *
      *             @OA\Property(property="photos", type="array", @OA\Items(type="object"))
      *         )
      *     ),
@@ -76,8 +89,9 @@ class NasaController extends Controller
             'data' => $data,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -85,32 +99,41 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/nasa/earth-imagery",
      *     summary="Get Earth Imagery",
+     *
      *     @OA\Parameter(
      *         name="lat",
      *         in="query",
      *         description="Latitude",
      *         required=true,
+     *
      *         @OA\Schema(type="number")
      *     ),
+     *
      *     @OA\Parameter(
      *         name="lon",
      *         in="query",
      *         description="Longitude",
      *         required=true,
+     *
      *         @OA\Schema(type="number")
      *     ),
+     *
      *     @OA\Parameter(
      *         name="date",
      *         in="query",
      *         description="Date",
      *         required=true,
+     *
      *         @OA\Schema(type="string", format="date")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful response",
+     *
      *         @OA\JsonContent(
      *             type="object",
+     *
      *             @OA\Property(property="url", type="string"),
      *             @OA\Property(property="id", type="string"),
      *         )
@@ -128,8 +151,9 @@ class NasaController extends Controller
             'date' => $date,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -137,11 +161,14 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/nasa/asteroids",
      *     summary="Get Asteroids",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful response",
+     *
      *         @OA\JsonContent(
      *             type="object",
+     *
      *             @OA\Property(property="near_earth_objects", type="array", @OA\Items(type="object"))
      *         )
      *     ),
@@ -155,8 +182,9 @@ class NasaController extends Controller
             'data' => $data,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -164,11 +192,14 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/nasa/epic",
      *     summary="Get EPIC",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful response",
+     *
      *         @OA\JsonContent(
      *             type="object",
+     *
      *             @OA\Property(property="caption", type="string"),
      *             @OA\Property(property="image", type="string"),
      *             @OA\Property(property="date", type="string")
@@ -184,8 +215,9 @@ class NasaController extends Controller
             'data' => $data,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -193,9 +225,11 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/mars-weather",
      *     summary="Get Mars Weather",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
+     *
      *         @OA\JsonContent()
      *     )
      * )
@@ -208,8 +242,9 @@ class NasaController extends Controller
             'data' => $data,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -217,9 +252,11 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/neo-feed",
      *     summary="Get NEO Feed",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
+     *
      *         @OA\JsonContent()
      *     )
      * )
@@ -232,8 +269,9 @@ class NasaController extends Controller
             'data' => $data,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -241,9 +279,11 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/tech-transfer-patents",
      *     summary="Get Tech Transfer Patents",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
+     *
      *         @OA\JsonContent()
      *     )
      * )
@@ -256,8 +296,9 @@ class NasaController extends Controller
             'data' => $data,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -265,9 +306,11 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/library-assets",
      *     summary="Get Library Assets",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
+     *
      *         @OA\JsonContent()
      *     )
      * )
@@ -280,8 +323,9 @@ class NasaController extends Controller
             'data' => $data,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -289,9 +333,11 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/sounds-library",
      *     summary="Get Sounds Library",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
+     *
      *         @OA\JsonContent()
      *     )
      * )
@@ -304,8 +350,9 @@ class NasaController extends Controller
             'data' => $data,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -313,9 +360,11 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/satellite-imagery",
      *     summary="Get Satellite Imagery",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
+     *
      *         @OA\JsonContent()
      *     )
      * )
@@ -328,8 +377,9 @@ class NasaController extends Controller
             'data' => $data,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -337,9 +387,11 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/techport-projects",
      *     summary="Get TechPort Projects",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
+     *
      *         @OA\JsonContent()
      *     )
      * )
@@ -352,8 +404,9 @@ class NasaController extends Controller
             'data' => $data,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 
@@ -361,9 +414,11 @@ class NasaController extends Controller
      * @OA\Get(
      *     path="/api/spinoff",
      *     summary="Get Spinoff",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
+     *
      *         @OA\JsonContent()
      *     )
      * )
@@ -376,8 +431,9 @@ class NasaController extends Controller
             'data' => $data,
             'user_id' => $user->id,
             'user_name' => $user->name,
-            'timestamp' => now()
+            'timestamp' => now(),
         ]);
+
         return response()->json($data);
     }
 }
