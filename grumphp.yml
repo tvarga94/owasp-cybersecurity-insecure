@@ -1,7 +1,16 @@
-# grumphp.yml
-grumphp:
-  stop_on_failure: true
-  parallel: false
+parameters:
+  git_dir: .
+  bin_dir: vendor/bin
   tasks:
+    phpstan:
+      level: max
+      configuration: phpstan.neon
     phpunit:
-      config_file: './phpunit.xml'
+      config_file: phpunit.xml
+      always_execute: true
+  hooks:
+    pre-commit:
+      enabled: true
+    commit-msg:
+      enabled: true
+      verbose: true

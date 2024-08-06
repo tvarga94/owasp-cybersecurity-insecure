@@ -4,18 +4,25 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // Adjust authorization logic as needed
+        return true;
     }
 
     public function rules(): array
     {
-        $userId = $this->route('user')->id;
+        $user = $this->route('user');
+
+        if (is_string($user)) {
+            $userId = User::findOrFail($user)->id;
+        } else {
+            $userId = $user->id;
+        }
 
         return [
             'name' => 'required|string|max:255',

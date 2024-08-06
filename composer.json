@@ -12,8 +12,9 @@
         "laravel/tinker": "^2.9"
     },
     "require-dev": {
+        "enlightn/enlightn": "^2.10",
+        "enlightn/security-checker": "^2.0",
         "fakerphp/faker": "^1.23",
-        "jorijn/laravel-security-checker": "^2.5",
         "larastan/larastan": "^2.0",
         "laravel/breeze": "^2.1",
         "laravel/pint": "^1.13",
@@ -53,7 +54,9 @@
         ],
         "phpstan": [
              "./vendor/bin/phpstan analyse"
-        ]
+        ],
+        "security-check": "security-checker security:check",
+        "pint": "./vendor/bin/pint"
     },
     "extra": {
         "laravel": {

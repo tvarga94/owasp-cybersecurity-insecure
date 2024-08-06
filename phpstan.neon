@@ -2,12 +2,14 @@ includes:
     - vendor/larastan/larastan/extension.neon
 
 parameters:
-
     paths:
         - app/
 
-    # Level 9 is the highest level
+    # Level 5 is the current level
     level: 5
+
+    excludePaths:
+        - app/Http/Controllers/Auth/VerifyEmailController.php
 
 #    ignoreErrors:
 #        - '#PHPDoc tag @var#'

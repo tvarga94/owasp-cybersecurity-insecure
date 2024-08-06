@@ -17,6 +17,7 @@ class NasaApiTest extends TestCase
     use RefreshDatabase, WithFaker;
 
     private MockInterface $mockedRepository;
+
     private User $user;
 
     protected function setUp(): void

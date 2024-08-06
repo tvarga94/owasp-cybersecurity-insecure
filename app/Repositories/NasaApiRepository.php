@@ -2,154 +2,298 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature;
+namespace App\Repositories;
 
+use App\Clients\NasaApiClient;
 use App\Interfaces\NasaApiRepositoryInterface;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Mockery;
-use Mockery\MockInterface;
-use Tests\TestCase;
+use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Log;
 
-class NasaApiTest extends TestCase
+class NasaApiRepository implements NasaApiRepositoryInterface
 {
-    use RefreshDatabase, WithFaker;
+    private NasaApiClient $client;
 
-    private MockInterface $mockedRepository;
+    private array $allowedDomains = [
+        'api.nasa.gov', // Example domain, add your allowed domains here
+    ];
 
-    protected function setUp(): void
+    public function __construct(NasaApiClient $client)
     {
-        parent::setUp();
-
-        // Create a user and authenticate
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
-        $this->mockedRepository = Mockery::mock(NasaApiRepositoryInterface::class);
-        $this->app->instance(NasaApiRepositoryInterface::class, $this->mockedRepository);
+        $this->client = $client;
     }
 
-    public function test_it_can_get_epic(): void
+    private function validateUrl(string $url): bool
     {
-        $this->mockedRepository
-            ->shouldReceive('getEPIC')
-            ->once()
-            ->andReturn(['caption' => 'Sample Caption', 'image' => 'http://example.com/epic.jpg', 'date' => '2023-01-01']);
+        $parsedUrl = parse_url($url);
+        if ($parsedUrl === false || ! isset($parsedUrl['host'])) {
+            return false;
+        }
 
-        $response = $this->getJson('/api/nasa/epic');
-
-        $response->assertStatus(200)
-            ->assertJson(['caption' => 'Sample Caption', 'image' => 'http://example.com/epic.jpg', 'date' => '2023-01-01']);
+        return in_array($parsedUrl['host'], $this->allowedDomains, true);
     }
 
-    public function test_it_can_get_mars_weather(): void
+    private function sanitizeResponse(array $data): array
     {
-        $this->mockedRepository
-            ->shouldReceive('getMarsWeather')
-            ->once()
-            ->andReturn(['sol' => 1000, 'temperature' => -60]);
-
-        $response = $this->getJson('/api/mars-weather');
-
-        $response->assertStatus(200)
-            ->assertJson(['sol' => 1000, 'temperature' => -60]);
+        return array_map('htmlspecialchars', $data);
     }
 
-    public function test_it_can_get_neo_feed(): void
+    public function getPictureOfTheDay(): array
     {
-        $this->mockedRepository
-            ->shouldReceive('getNeoFeed')
-            ->once()
-            ->andReturn(['near_earth_objects' => [['id' => 1, 'name' => 'Near Earth Object 1']]]);
+        try {
+            $url = 'https://api.nasa.gov/planetary/apod'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
 
-        $response = $this->getJson('/api/neo-feed');
+            $data = $this->client->getPictureOfTheDay();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched NASA Picture of the Day', ['timestamp' => now()]);
 
-        $response->assertStatus(200)
-            ->assertJson(['near_earth_objects' => [['id' => 1, 'name' => 'Near Earth Object 1']]]);
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching Picture of the Day', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
     }
 
-    public function test_it_can_get_tech_transfer_patents(): void
+    public function getMarsRoverPhotos(): array
     {
-        $this->mockedRepository
-            ->shouldReceive('getTechTransferPatents')
-            ->once()
-            ->andReturn(['patents' => [['id' => 1, 'title' => 'Patent 1']]]);
+        try {
+            $url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
 
-        $response = $this->getJson('/api/tech-transfer-patents');
+            $data = $this->client->getMarsRoverPhotos();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched Mars Rover Photos', ['timestamp' => now()]);
 
-        $response->assertStatus(200)
-            ->assertJson(['patents' => [['id' => 1, 'title' => 'Patent 1']]]);
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching Mars Rover Photos', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
     }
 
-    public function test_it_can_get_library_assets(): void
+    public function getEarthImagery(float $lat, float $lon, string $date): array
     {
-        $this->mockedRepository
-            ->shouldReceive('getLibraryAssets')
-            ->once()
-            ->andReturn(['collection' => [['id' => 1, 'title' => 'Asset 1']]]);
+        try {
+            $url = 'https://api.nasa.gov/planetary/earth/imagery'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
 
-        $response = $this->getJson('/api/library-assets');
+            $data = $this->client->getEarthImagery($lat, $lon, $date);
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched Earth Imagery', ['lat' => $lat, 'lon' => $lon, 'date' => $date, 'timestamp' => now()]);
 
-        $response->assertStatus(200)
-            ->assertJson(['collection' => [['id' => 1, 'title' => 'Asset 1']]]);
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching Earth Imagery', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
     }
 
-    public function test_it_can_get_sounds_library(): void
+    public function getAsteroids(): array
     {
-        $this->mockedRepository
-            ->shouldReceive('getSoundsLibrary')
-            ->once()
-            ->andReturn(['sounds' => [['id' => 1, 'title' => 'Sound 1']]]);
+        try {
+            $url = 'https://api.nasa.gov/neo/rest/v1/feed'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
 
-        $response = $this->getJson('/api/sounds-library');
+            $data = $this->client->getAsteroids();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched Asteroids', ['timestamp' => now()]);
 
-        $response->assertStatus(200)
-            ->assertJson(['sounds' => [['id' => 1, 'title' => 'Sound 1']]]);
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching Asteroids', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
     }
 
-    public function test_it_can_get_satellite_imagery(): void
+    public function getEPIC(): array
     {
-        $this->mockedRepository
-            ->shouldReceive('getSatelliteImagery')
-            ->once()
-            ->andReturn(['satellites' => [['id' => 1, 'name' => 'Satellite 1']]]);
+        try {
+            $url = 'https://api.nasa.gov/EPIC/api/natural'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
 
-        $response = $this->getJson('/api/satellite-imagery');
+            $data = $this->client->getEPIC();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched EPIC', ['timestamp' => now()]);
 
-        $response->assertStatus(200)
-            ->assertJson(['satellites' => [['id' => 1, 'name' => 'Satellite 1']]]);
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching EPIC', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
     }
 
-    public function test_it_can_get_techport_projects(): void
+    public function getMarsWeather(): array
     {
-        $this->mockedRepository
-            ->shouldReceive('getTechPortProjects')
-            ->once()
-            ->andReturn(['projects' => [['id' => 1, 'title' => 'Project 1']]]);
+        try {
+            $url = 'https://api.nasa.gov/insight_weather/'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
 
-        $response = $this->getJson('/api/techport-projects');
+            $data = $this->client->getMarsWeather();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched Mars Weather', ['timestamp' => now()]);
 
-        $response->assertStatus(200)
-            ->assertJson(['projects' => [['id' => 1, 'title' => 'Project 1']]]);
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching Mars Weather', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
     }
 
-    public function test_it_can_get_spinoff(): void
+    public function getNeoFeed(): array
     {
-        $this->mockedRepository
-            ->shouldReceive('getSpinoff')
-            ->once()
-            ->andReturn(['spinoffs' => [['id' => 1, 'title' => 'Spinoff 1']]]);
+        try {
+            $url = 'https://api.nasa.gov/neo/rest/v1/feed'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
 
-        $response = $this->getJson('/api/spinoff');
+            $data = $this->client->getNeoFeed();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched NEO Feed', ['timestamp' => now()]);
 
-        $response->assertStatus(200)
-            ->assertJson(['spinoffs' => [['id' => 1, 'title' => 'Spinoff 1']]]);
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching NEO Feed', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
     }
 
-    protected function tearDown(): void
+    public function getTechTransferPatents(): array
     {
-        Mockery::close();
-        parent::tearDown();
+        try {
+            $url = 'https://api.nasa.gov/techtransfer/patent/'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
+
+            $data = $this->client->getTechTransferPatents();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched Tech Transfer Patents', ['timestamp' => now()]);
+
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching Tech Transfer Patents', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
+    }
+
+    public function getLibraryAssets(): array
+    {
+        try {
+            $url = 'https://images-api.nasa.gov'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
+
+            $data = $this->client->getLibraryAssets();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched Library Assets', ['timestamp' => now()]);
+
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching Library Assets', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
+    }
+
+    public function getSoundsLibrary(): array
+    {
+        try {
+            $url = 'https://api.nasa.gov/planetary/sounds'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
+
+            $data = $this->client->getSoundsLibrary();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched Sounds Library', ['timestamp' => now()]);
+
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching Sounds Library', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
+    }
+
+    public function getSatelliteImagery(): array
+    {
+        try {
+            $url = 'https://api.nasa.gov/planetary/earth/assets'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
+
+            $data = $this->client->getSatelliteImagery();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched Satellite Imagery', ['timestamp' => now()]);
+
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching Satellite Imagery', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
+    }
+
+    public function getTechPortProjects(): array
+    {
+        try {
+            $url = 'https://api.nasa.gov/techport/'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
+
+            $data = $this->client->getTechPortProjects();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched TechPort Projects', ['timestamp' => now()]);
+
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching TechPort Projects', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
+    }
+
+    public function getSpinoff(): array
+    {
+        try {
+            $url = 'https://api.nasa.gov/spinoff/'; // Example URL
+            if (! $this->validateUrl($url)) {
+                throw new \Exception('Invalid URL: '.$url);
+            }
+
+            $data = $this->client->getSpinoff();
+            $data = $this->sanitizeResponse($data);
+            Log::info('Fetched Spinoff', ['timestamp' => now()]);
+
+            return $data;
+        } catch (RequestException $e) {
+            Log::error('Error fetching Spinoff', ['error' => $e->getMessage(), 'timestamp' => now()]);
+
+            return [];
+        }
     }
 }

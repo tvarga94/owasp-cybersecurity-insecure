@@ -50,7 +50,7 @@ class NasaController extends Controller
         $data = $this->nasaApiRepository->getPictureOfTheDay();
         $user = Auth::user();
 
-        if (!$user) {
+        if (! $user) {
             return response()->json(['error' => 'Unauthenticated'], Response::HTTP_UNAUTHORIZED);
         }
 
