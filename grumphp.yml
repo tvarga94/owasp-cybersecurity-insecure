@@ -1,7 +1,14 @@
 parameters:
   git_dir: .
   bin_dir: vendor/bin
+  extensions:
+    - YieldStudio\GrumPHPLaravelPint\ExtensionLoader
   tasks:
+    laravel_pint:
+      config: pint.json
+      preset: laravel
+      auto_fix: 'pre_commit'
+      auto_stage: 'pre_commit'
     phpstan:
       level: max
       configuration: phpstan.neon
