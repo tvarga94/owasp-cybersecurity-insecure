@@ -12,7 +12,6 @@
         "laravel/tinker": "^2.9"
     },
     "require-dev": {
-        "enlightn/enlightn": "^2.10",
         "enlightn/security-checker": "^2.0",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^2.0",
