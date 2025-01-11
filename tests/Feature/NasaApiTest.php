@@ -14,7 +14,8 @@ use Tests\TestCase;
 
 class NasaApiTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     private MockInterface $mockedRepository;
 

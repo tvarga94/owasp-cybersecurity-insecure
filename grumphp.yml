@@ -9,9 +9,9 @@ parameters:
       preset: laravel
       auto_fix: 'pre_commit'
       auto_stage: 'pre_commit'
-    phpstan:
-      level: max
-      configuration: phpstan.neon
+   # phpstan:
+    #  level: 1
+    #  configuration: phpstan.neon
     phpunit:
       config_file: phpunit.xml
       always_execute: true

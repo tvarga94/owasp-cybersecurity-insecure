@@ -8,6 +8,9 @@
     "paths": {
         "/api/nasa/picture-of-the-day": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get NASA Picture of the Day",
                 "operationId": "801dffb02462d140908cc246fc619aba",
                 "responses": {
@@ -37,6 +40,9 @@
         },
         "/api/nasa/mars-rover-photos": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get Mars Rover Photos",
                 "operationId": "7823a137cb43c6d04548c6105949512a",
                 "responses": {
@@ -63,6 +69,9 @@
         },
         "/api/nasa/earth-imagery": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get Earth Imagery",
                 "operationId": "7d6067ce121e83da176b06fa2f5fd59e",
                 "parameters": [
@@ -119,6 +128,9 @@
         },
         "/api/nasa/asteroids": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get Asteroids",
                 "operationId": "8f16e5c66fee414bfdfa929aa3d47c46",
                 "responses": {
@@ -145,6 +157,9 @@
         },
         "/api/nasa/epic": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get EPIC",
                 "operationId": "1f32fb564cd511ed62b87556331a4038",
                 "responses": {
@@ -174,6 +189,9 @@
         },
         "/api/mars-weather": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get Mars Weather",
                 "operationId": "17519abfb50beb3db6ac9a911ca8e60f",
                 "responses": {
@@ -190,6 +208,9 @@
         },
         "/api/neo-feed": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get NEO Feed",
                 "operationId": "883b58f885aef8f465e39c0c3181c890",
                 "responses": {
@@ -206,6 +227,9 @@
         },
         "/api/tech-transfer-patents": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get Tech Transfer Patents",
                 "operationId": "fad6e79688f3339ac4c9395774a86c90",
                 "responses": {
@@ -222,6 +246,9 @@
         },
         "/api/library-assets": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get Library Assets",
                 "operationId": "4ac8504bd0b272fa859312ff56111797",
                 "responses": {
@@ -238,6 +265,9 @@
         },
         "/api/sounds-library": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get Sounds Library",
                 "operationId": "c2dfc42d13834acd1a3736713b06e995",
                 "responses": {
@@ -254,6 +284,9 @@
         },
         "/api/satellite-imagery": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get Satellite Imagery",
                 "operationId": "8f7aa50e09eb28876a1fdb3702daab35",
                 "responses": {
@@ -270,6 +303,9 @@
         },
         "/api/techport-projects": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get TechPort Projects",
                 "operationId": "3989ac368b4edf7ba8e556dff5022e97",
                 "responses": {
@@ -286,6 +322,9 @@
         },
         "/api/spinoff": {
             "get": {
+                "tags": [
+                    "NASA Endpoints"
+                ],
                 "summary": "Get Spinoff",
                 "operationId": "098250fb358543d8cadbac8842161439",
                 "responses": {
@@ -300,5 +339,11 @@
                 }
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "NASA Endpoints",
+            "description": "NASA Endpoints"
+        }
+    ]
 }

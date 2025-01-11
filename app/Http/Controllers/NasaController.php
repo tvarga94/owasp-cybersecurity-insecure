@@ -6,8 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\NasaApiRepositoryInterface;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -29,6 +27,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/nasa/picture-of-the-day",
+     *     tags={"NASA Endpoints"},
      *     summary="Get NASA Picture of the Day",
      *
      *     @OA\Response(
@@ -48,18 +47,6 @@ class NasaController extends Controller
     public function showPictureOfTheDay(): JsonResponse
     {
         $data = $this->nasaApiRepository->getPictureOfTheDay();
-        $user = Auth::user();
-
-        if (! $user) {
-            return response()->json(['error' => 'Unauthenticated'], Response::HTTP_UNAUTHORIZED);
-        }
-
-        Log::info('Fetched NASA Picture of the Day', [
-            'data' => $data,
-            'user_id' => $user['id'],
-            'user_name' => $user['name'],
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -67,6 +54,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/nasa/mars-rover-photos",
+     *     tags={"NASA Endpoints"},
      *     summary="Get Mars Rover Photos",
      *
      *     @OA\Response(
@@ -84,13 +72,6 @@ class NasaController extends Controller
     public function showMarsRoverPhotos(): JsonResponse
     {
         $data = $this->nasaApiRepository->getMarsRoverPhotos();
-        $user = Auth::user();
-        Log::info('Fetched Mars Rover Photos', [
-            'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -98,6 +79,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/nasa/earth-imagery",
+     *     tags={"NASA Endpoints"},
      *     summary="Get Earth Imagery",
      *
      *     @OA\Parameter(
@@ -143,16 +125,6 @@ class NasaController extends Controller
     public function showEarthImagery(float $lat, float $lon, string $date): JsonResponse
     {
         $data = $this->nasaApiRepository->getEarthImagery($lat, $lon, $date);
-        $user = Auth::user();
-        Log::info('Fetched Earth Imagery', [
-            'data' => $data,
-            'lat' => $lat,
-            'lon' => $lon,
-            'date' => $date,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -160,6 +132,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/nasa/asteroids",
+     *     tags={"NASA Endpoints"},
      *     summary="Get Asteroids",
      *
      *     @OA\Response(
@@ -177,13 +150,6 @@ class NasaController extends Controller
     public function showAsteroids(): JsonResponse
     {
         $data = $this->nasaApiRepository->getAsteroids();
-        $user = Auth::user();
-        Log::info('Fetched Asteroids', [
-            'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -191,6 +157,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/nasa/epic",
+     *     tags={"NASA Endpoints"},
      *     summary="Get EPIC",
      *
      *     @OA\Response(
@@ -210,13 +177,6 @@ class NasaController extends Controller
     public function showEPIC(): JsonResponse
     {
         $data = $this->nasaApiRepository->getEPIC();
-        $user = Auth::user();
-        Log::info('Fetched EPIC', [
-            'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -224,6 +184,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/mars-weather",
+     *     tags={"NASA Endpoints"},
      *     summary="Get Mars Weather",
      *
      *     @OA\Response(
@@ -237,13 +198,6 @@ class NasaController extends Controller
     public function getMarsWeather(): JsonResponse
     {
         $data = $this->nasaApiRepository->getMarsWeather();
-        $user = Auth::user();
-        Log::info('Fetched Mars Weather', [
-            'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -251,6 +205,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/neo-feed",
+     *     tags={"NASA Endpoints"},
      *     summary="Get NEO Feed",
      *
      *     @OA\Response(
@@ -264,13 +219,6 @@ class NasaController extends Controller
     public function getNeoFeed(): JsonResponse
     {
         $data = $this->nasaApiRepository->getNeoFeed();
-        $user = Auth::user();
-        Log::info('Fetched NEO Feed', [
-            'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -278,6 +226,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/tech-transfer-patents",
+     *     tags={"NASA Endpoints"},
      *     summary="Get Tech Transfer Patents",
      *
      *     @OA\Response(
@@ -291,13 +240,6 @@ class NasaController extends Controller
     public function getTechTransferPatents(): JsonResponse
     {
         $data = $this->nasaApiRepository->getTechTransferPatents();
-        $user = Auth::user();
-        Log::info('Fetched Tech Transfer Patents', [
-            'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -305,6 +247,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/library-assets",
+     *     tags={"NASA Endpoints"},
      *     summary="Get Library Assets",
      *
      *     @OA\Response(
@@ -318,13 +261,6 @@ class NasaController extends Controller
     public function getLibraryAssets(): JsonResponse
     {
         $data = $this->nasaApiRepository->getLibraryAssets();
-        $user = Auth::user();
-        Log::info('Fetched Library Assets', [
-            'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -332,6 +268,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/sounds-library",
+     *     tags={"NASA Endpoints"},
      *     summary="Get Sounds Library",
      *
      *     @OA\Response(
@@ -345,13 +282,6 @@ class NasaController extends Controller
     public function getSoundsLibrary(): JsonResponse
     {
         $data = $this->nasaApiRepository->getSoundsLibrary();
-        $user = Auth::user();
-        Log::info('Fetched Sounds Library', [
-            'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -359,6 +289,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/satellite-imagery",
+     *     tags={"NASA Endpoints"},
      *     summary="Get Satellite Imagery",
      *
      *     @OA\Response(
@@ -372,13 +303,6 @@ class NasaController extends Controller
     public function getSatelliteImagery(): JsonResponse
     {
         $data = $this->nasaApiRepository->getSatelliteImagery();
-        $user = Auth::user();
-        Log::info('Fetched Satellite Imagery', [
-            'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -386,6 +310,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/techport-projects",
+     *     tags={"NASA Endpoints"},
      *     summary="Get TechPort Projects",
      *
      *     @OA\Response(
@@ -399,13 +324,6 @@ class NasaController extends Controller
     public function getTechPortProjects(): JsonResponse
     {
         $data = $this->nasaApiRepository->getTechPortProjects();
-        $user = Auth::user();
-        Log::info('Fetched TechPort Projects', [
-            'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }
@@ -413,6 +331,7 @@ class NasaController extends Controller
     /**
      * @OA\Get(
      *     path="/api/spinoff",
+     *     tags={"NASA Endpoints"},
      *     summary="Get Spinoff",
      *
      *     @OA\Response(
@@ -426,13 +345,6 @@ class NasaController extends Controller
     public function getSpinoff(): JsonResponse
     {
         $data = $this->nasaApiRepository->getSpinoff();
-        $user = Auth::user();
-        Log::info('Fetched Spinoff', [
-            'data' => $data,
-            'user_id' => $user->id,
-            'user_name' => $user->name,
-            'timestamp' => now(),
-        ]);
 
         return response()->json($data);
     }

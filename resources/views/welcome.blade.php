@@ -892,15 +892,22 @@
                                     <span class="text-white font-bold">Register</span>
                                 </a>
                             @endif
+
                         @endauth
+                        <a
+                            href="{{ url('/api/documentation') }}"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                        >
+                            <span class="text-white font-bold">NASA API</span>
+                        </a>
                     </nav>
                 @endif
             </header>
 
             <main class="mt-6">
                 <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                    <img src="{{ asset('storage/images/home1.jpg') }}" alt="wd" />
-                    <img src="{{ asset('storage/images/home3.jpg') }}" alt="wd" />
+                    <img src="{{ asset('storage/images/home1.jpg') }}" alt="wd"/>
+                    <img src="{{ asset('storage/images/home3.jpg') }}" alt="wd"/>
                     <span style="color: white; font-weight: bold">
                       On July 20, 1969, the Apollo 11 mission achieved one of humanity's greatest feats: landing on the moon. Neil Armstrong, Buzz Aldrin, and Michael Collins were the astronauts on this historic mission. As the world watched, Armstrong became the first human to set foot on the lunar surface, uttering the iconic words, "That's one small step for man, one giant leap for mankind."
 The journey to the moon was a result of years of intense research, engineering, and dedication. The astronauts traveled 240,000 miles through space in Apollo 11. Armstrong and Aldrin descended to the moon's surface in the lunar module "Eagle," while Collins orbited above in the command module.
