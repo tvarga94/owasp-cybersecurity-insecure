@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Interfaces\NasaApiRepositoryInterface;
-use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Mockery;
 use Mockery\MockInterface;
@@ -17,16 +16,11 @@ class NasaApiTest extends TestCase
 
     private MockInterface $mockedRepository;
 
-    private User $user;
-
     protected function setUp(): void
     {
         parent::setUp();
         $this->mockedRepository = Mockery::mock(NasaApiRepositoryInterface::class);
         $this->app->instance(NasaApiRepositoryInterface::class, $this->mockedRepository);
-
-        $this->user = User::factory()->create();
-        $this->actingAs($this->user);
     }
 
     public function test_it_can_get_epic(): void
