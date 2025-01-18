@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel</title>
-    <link rel="icon" href="{{ asset('storage/images/favicon.png') }}" type="image/png"/>
+    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png"/>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
@@ -853,7 +853,7 @@
         body {
             margin: 0;
             line-height: inherit;
-            background-image: url('{{ asset('storage/images/moon.png') }}');
+            background-image: url('{{ asset('images/moon.png') }}');
             background-size: cover;
             background-position: center;
         }
@@ -906,8 +906,8 @@
 
             <main class="mt-6">
                 <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                    <img src="{{ asset('storage/images/home1.jpg') }}" alt="wd"/>
-                    <img src="{{ asset('storage/images/home3.jpg') }}" alt="wd"/>
+                    <img src="{{ asset('images/home1.jpg') }}" alt="wd"/>
+                    <img src="{{ asset('images/home2.jpg') }}" alt="wd"/>
                     <span style="color: white; font-weight: bold">
                       On July 20, 1969, the Apollo 11 mission achieved one of humanity's greatest feats: landing on the moon. Neil Armstrong, Buzz Aldrin, and Michael Collins were the astronauts on this historic mission. As the world watched, Armstrong became the first human to set foot on the lunar surface, uttering the iconic words, "That's one small step for man, one giant leap for mankind."
 The journey to the moon was a result of years of intense research, engineering, and dedication. The astronauts traveled 240,000 miles through space in Apollo 11. Armstrong and Aldrin descended to the moon's surface in the lunar module "Eagle," while Collins orbited above in the command module.

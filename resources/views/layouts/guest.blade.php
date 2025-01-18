@@ -9,6 +9,7 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
+        <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png"/>
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
@@ -17,7 +18,7 @@
             body {
                 margin: 0;
                 line-height: inherit;
-                background-image: url('{{ asset('storage/images/moon.png') }}');
+                background-image: url('{{ asset('images/moon.png') }}');
                 background-size: cover;
                 background-position: center;
             }
@@ -27,7 +28,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
             <div>
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <img src="{{ asset('images/favicon.png') }}" alt="Logo" class="w-20 h-20">
                 </a>
             </div>
 

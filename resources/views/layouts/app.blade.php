@@ -9,7 +9,9 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
+    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png"/>
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -17,12 +19,16 @@
         html, body {
             margin: 0;
             line-height: inherit;
-            background-image: url('{{ asset('storage/images/earth.jpg') }}');
+            background-image: url('{{ asset('images/earth.jpg') }}');
             background-size: cover;
             background-position: center;
             background-repeat: repeat;
             min-height: 100vh;
             height: auto;
+        }
+
+        .mt-5-new {
+            margin: 3% !important;
         }
     </style>
 </head>
@@ -35,5 +41,6 @@
         @yield('content')
     </main>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

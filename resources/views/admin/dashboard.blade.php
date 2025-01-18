@@ -5,7 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white">{{ __('Admin Dashboard') }}</div>
+                    <div class="card-header bg-primary text-white">
+                        {{ __('Admin Dashboard') }}
+                    </div>
                     <div class="card-body">
                         @if (session('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -14,21 +16,23 @@
                             </div>
                         @endif
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead-dark">
+                            <table class="table table-bordered table-striped table-hover align-middle">
+                                <thead class="table-light">
                                 <tr>
+                                    <th scope="col" style="width: 50px;">No</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Actions</th>
+                                    <th scope="col" style="width: 200px;">Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($users as $user)
+                                @forelse ($users as $index => $user)
                                     <tr>
+                                        <td>{{ $index + 1 }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-warning btn-sm me-2">Edit</a>
                                             <form action="{{ route('admin.users.destroy', $user) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
@@ -36,7 +40,11 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center">No users found.</td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
                         </div>
