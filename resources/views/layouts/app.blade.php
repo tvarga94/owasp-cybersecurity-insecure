@@ -14,20 +14,15 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
-        .custom-bg {
+        html, body {
             margin: 0;
             line-height: inherit;
             background-image: url('{{ asset('storage/images/earth.jpg') }}');
             background-size: cover;
             background-position: center;
             background-repeat: repeat;
-        }
-
-        @media (max-width: 600px) {
-            .custom-bg {
-                background-repeat: repeat;
-                background-size: auto;
-            }
+            min-height: 100vh;
+            height: auto;
         }
     </style>
 </head>

@@ -30,7 +30,7 @@
 
     .box {
         width: 100%;
-        aspect-ratio: 1 / 1;
+        height: 300px;
         background-color: white;
         border: 2px solid #ddd;
         border-radius: 10px;
@@ -38,7 +38,7 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-end;
         transition: transform 0.2s, box-shadow 0.2s;
     }
 
@@ -49,12 +49,14 @@
 
     .box img {
         width: 100%;
-        height: 80%;
+        height: auto;
+        aspect-ratio: 16 / 9;
         object-fit: cover;
     }
 
     .box-text {
         height: 20%;
+        background-color: #ffffff;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -62,6 +64,7 @@
         font-weight: bold;
         text-align: center;
         padding: 10px;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     }
 
     @media (max-width: 900px) {
@@ -78,6 +81,7 @@
             height: 250px;
         }
     }
+
 </style>
 
 <x-app-layout>
@@ -86,37 +90,37 @@
             <div class="dashboard-grid">
                 <div class="box">
                     <a href="/api/documentation" target="_blank">
-                        <img src="http://placekitten.com/600/600" alt="NASA API">
+                        <img src="{{ asset('/images/nasa-api.jpg') }}" height="75" alt="NASA API">
                         <div class="box-text">NASA API</div>
                     </a>
                 </div>
                 <div class="box">
                     <a href="https://www.nasa.gov/nasalive" target="_blank">
-                        <img src="http://placekitten.com/601/601" alt="NASA TV">
+                        <img src="{{ asset('/images/nasa.jpg') }}" alt="NASA TV">
                         <div class="box-text">NASA TV - Official Stream</div>
                     </a>
                 </div>
                 <div class="box">
                     <a href="https://hubblesite.org/images/gallery" target="_blank">
-                        <img src="http://placekitten.com/602/602" alt="Hubble Gallery">
-                        <div class="box-text">Hubble Space Telescope - Image Gallery</div>
+                        <img src="{{ asset('/images/hubble.jpg') }}" alt="Hubble Gallery">
+                        <div class="box-text">Hubble Space Telescope</div>
                     </a>
                 </div>
                 <div class="box">
                     <a href="https://apod.nasa.gov/apod/" target="_blank">
-                        <img src="http://placekitten.com/603/603" alt="APOD">
+                        <img src="{{ asset('/images/outer-space-dashboard.jpg') }}"alt="APOD">
                         <div class="box-text">Astronomy Picture of the Day</div>
                     </a>
                 </div>
                 <div class="box">
                     <a href="https://www.n2yo.com/?s=25544" target="_blank">
-                        <img src="http://placekitten.com/604/604" alt="Track ISS">
+                        <img src="{{ asset('/images/internation-space-station.jpg') }}" alt="Track ISS">
                         <div class="box-text">Track the ISS</div>
                     </a>
                 </div>
                 <div class="box">
                     <a href="https://mars.nasa.gov/mars2020/" target="_blank">
-                        <img src="http://placekitten.com/605/605" alt="Perseverance">
+                        <img src="{{ asset('/images/mars-rover.jpg') }}" alt="Perseverance">
                         <div class="box-text">Perseverance Rover on Mars</div>
                     </a>
                 </div>
