@@ -6,7 +6,6 @@ namespace Tests\Feature;
 
 use App\Interfaces\NasaApiRepositoryInterface;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Mockery;
 use Mockery\MockInterface;
@@ -14,7 +13,6 @@ use Tests\TestCase;
 
 class NasaApiTest extends TestCase
 {
-    use RefreshDatabase;
     use WithFaker;
 
     private MockInterface $mockedRepository;

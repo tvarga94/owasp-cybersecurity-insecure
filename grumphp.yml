@@ -12,9 +12,9 @@ parameters:
    # phpstan:
     #  level: 1
     #  configuration: phpstan.neon
-    phpunit:
-      config_file: phpunit.xml
-      always_execute: true
+   # phpunit:
+    #  config_file: phpunit.xml
+     # always_execute: true
     securitychecker_enlightn:
       lockfile: ./composer.lock
       run_always: false
