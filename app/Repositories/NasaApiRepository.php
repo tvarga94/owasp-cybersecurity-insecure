@@ -14,7 +14,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     private NasaApiClient $client;
 
     private array $allowedDomains = [
-        'api.nasa.gov', // Example domain, add your allowed domains here
+        'api.nasa.gov',
     ];
 
     public function __construct(NasaApiClient $client)
@@ -40,7 +40,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getPictureOfTheDay(): array
     {
         try {
-            $url = 'https://api.nasa.gov/planetary/apod'; // Example URL
+            $url = 'https://api.nasa.gov/planetary/apod';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -60,7 +60,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getMarsRoverPhotos(): array
     {
         try {
-            $url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos'; // Example URL
+            $url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -80,7 +80,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getEarthImagery(float $lat, float $lon, string $date): array
     {
         try {
-            $url = 'https://api.nasa.gov/planetary/earth/imagery'; // Example URL
+            $url = 'https://api.nasa.gov/planetary/earth/imagery';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -100,7 +100,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getAsteroids(): array
     {
         try {
-            $url = 'https://api.nasa.gov/neo/rest/v1/feed'; // Example URL
+            $url = 'https://api.nasa.gov/neo/rest/v1/feed';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -120,7 +120,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getEPIC(): array
     {
         try {
-            $url = 'https://api.nasa.gov/EPIC/api/natural'; // Example URL
+            $url = 'https://api.nasa.gov/EPIC/api/natural';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -140,7 +140,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getMarsWeather(): array
     {
         try {
-            $url = 'https://api.nasa.gov/insight_weather/'; // Example URL
+            $url = 'https://api.nasa.gov/insight_weather/';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -160,7 +160,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getNeoFeed(): array
     {
         try {
-            $url = 'https://api.nasa.gov/neo/rest/v1/feed'; // Example URL
+            $url = 'https://api.nasa.gov/neo/rest/v1/feed';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -180,7 +180,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getTechTransferPatents(): array
     {
         try {
-            $url = 'https://api.nasa.gov/techtransfer/patent/'; // Example URL
+            $url = 'https://api.nasa.gov/techtransfer/patent/';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -200,7 +200,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getLibraryAssets(): array
     {
         try {
-            $url = 'https://images-api.nasa.gov'; // Example URL
+            $url = 'https://images-api.nasa.gov';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -220,7 +220,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getSoundsLibrary(): array
     {
         try {
-            $url = 'https://api.nasa.gov/planetary/sounds'; // Example URL
+            $url = 'https://api.nasa.gov/planetary/sounds';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -240,7 +240,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getSatelliteImagery(): array
     {
         try {
-            $url = 'https://api.nasa.gov/planetary/earth/assets'; // Example URL
+            $url = 'https://api.nasa.gov/planetary/earth/assets';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -260,7 +260,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getTechPortProjects(): array
     {
         try {
-            $url = 'https://api.nasa.gov/techport/'; // Example URL
+            $url = 'https://api.nasa.gov/techport/';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
@@ -280,7 +280,7 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     public function getSpinoff(): array
     {
         try {
-            $url = 'https://api.nasa.gov/spinoff/'; // Example URL
+            $url = 'https://api.nasa.gov/spinoff/';
             if (! $this->validateUrl($url)) {
                 throw new \Exception('Invalid URL: '.$url);
             }
