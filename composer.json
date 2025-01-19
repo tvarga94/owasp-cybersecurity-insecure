@@ -1,7 +1,7 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Secure Web Development based on OWASP rules",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
