@@ -857,6 +857,10 @@
             background-size: cover;
             background-position: center;
         }
+
+        img[alt="home-page-picture-astronaut"] {
+            border-radius: 16px;
+        }
     </style>
 </head>
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
@@ -906,8 +910,8 @@
 
             <main class="mt-6">
                 <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                    <img src="{{ asset('images/home1.jpg') }}" alt="wd"/>
-                    <img src="{{ asset('images/home2.jpg') }}" alt="wd"/>
+                    <img src="{{ asset('images/home1.jpg') }}" alt="home-page-picture-astronaut" class="rounded-xl" />
+                    <img src="{{ asset('images/home2.jpg') }}" alt="home-page-picture-spacecraft"/>
                     <span style="color: white; font-weight: bold">
                       On July 20, 1969, the Apollo 11 mission achieved one of humanity's greatest feats: landing on the moon. Neil Armstrong, Buzz Aldrin, and Michael Collins were the astronauts on this historic mission. As the world watched, Armstrong became the first human to set foot on the lunar surface, uttering the iconic words, "That's one small step for man, one giant leap for mankind."
 The journey to the moon was a result of years of intense research, engineering, and dedication. The astronauts traveled 240,000 miles through space in Apollo 11. Armstrong and Aldrin descended to the moon's surface in the lunar module "Eagle," while Collins orbited above in the command module.
