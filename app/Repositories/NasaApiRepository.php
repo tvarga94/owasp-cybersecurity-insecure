@@ -48,7 +48,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getPictureOfTheDay';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getPictureOfTheDay');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -60,12 +59,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getPictureOfTheDay();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched NASA Picture of the Day', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching Picture of the Day', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -74,7 +70,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getMarsRoverPhotos';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getMarsRoverPhotos');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -86,12 +81,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getMarsRoverPhotos();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched Mars Rover Photos', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching Mars Rover Photos', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -100,7 +92,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getEarthImagery';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getEarthImagery');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -112,12 +103,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getEarthImagery($lat, $lon, $date);
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched Earth Imagery', ['lat' => $lat, 'lon' => $lon, 'date' => $date, 'timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching Earth Imagery', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -126,7 +114,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getAsteroids';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getAsteroids');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -138,12 +125,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getAsteroids();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched Asteroids', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching Asteroids', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -152,7 +136,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getEPIC';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getEPIC');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -164,12 +147,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getEPIC();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched EPIC', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching EPIC', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -178,7 +158,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getMarsWeather';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getMarsWeather');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -190,12 +169,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getMarsWeather();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched Mars Weather', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching Mars Weather', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -204,7 +180,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getNeoFeed';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getNeoFeed');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -216,12 +191,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getNeoFeed();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched NEO Feed', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching NEO Feed', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -230,7 +202,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getTechTransferPatents';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getTechTransferPatents');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -242,12 +213,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getTechTransferPatents();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched Tech Transfer Patents', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching Tech Transfer Patents', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -256,7 +224,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getLibraryAssets';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getLibraryAssets');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -268,12 +235,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getLibraryAssets();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched Library Assets', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching Library Assets', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -282,7 +246,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getSoundsLibrary';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getSoundsLibrary');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -294,12 +257,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getSoundsLibrary();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched Sounds Library', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching Sounds Library', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -308,7 +268,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getSatelliteImagery';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getSatelliteImagery');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -320,12 +279,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getSatelliteImagery();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched Satellite Imagery', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching Satellite Imagery', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -334,7 +290,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getTechPortProjects';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getTechPortProjects');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -346,12 +301,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getTechPortProjects();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched TechPort Projects', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching TechPort Projects', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
@@ -360,7 +312,6 @@ class NasaApiRepository implements NasaApiRepositoryInterface
     {
         $rateLimitKey = 'nasa:getSpinoff';
         if ($this->isRateLimited($rateLimitKey)) {
-            Log::warning('Rate limit exceeded for getSpinoff');
             return ['error' => 'Rate limit exceeded. Please try again later.'];
         }
 
@@ -372,12 +323,9 @@ class NasaApiRepository implements NasaApiRepositoryInterface
 
             $data = $this->client->getSpinoff();
             $data = $this->sanitizeResponse($data);
-            Log::info('Fetched Spinoff', ['timestamp' => now()]);
 
             return $data;
         } catch (RequestException $e) {
-            Log::error('Error fetching Spinoff', ['error' => $e->getMessage(), 'timestamp' => now()]);
-
             return [];
         }
     }
