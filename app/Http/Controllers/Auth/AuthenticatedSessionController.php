@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -27,13 +27,14 @@ class AuthenticatedSessionController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        $user = User::where('email', $email)->first();
+        $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password' LIMIT 1";
+        $user = collect(DB::select($sql))->first();
 
-        if (! $user || $user->password !== $password) {
+        if (! $user) {
             return back()->withErrors(['email' => 'These credentials do not match our records.']);
         }
 
-        Auth::login($user);
+        Auth::loginUsingId($user->id);
 
         return redirect('/dashboard');
     }
